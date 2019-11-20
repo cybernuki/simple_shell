@@ -11,18 +11,15 @@ char **array_to_strok(char *str, char **commands, int *size)
     if (!commands)
         return (NULL);
 
-    token = strtok(str, " ");
+    token = strtok(str, " \n");
     commands[*size] = token;
-    while (!token) 
+    while (token) 
    {
         (*size) += 1;
-        token = strtok(NULL, " ");
+        token = strtok(NULL, " \n");
         commands = (char **)realloc(commands, (*size + 1) * sizeof(commands));
         commands[*size] = token;
  
-   }    (*size) += 1;
-        commands = (char **)realloc(commands, (*size + 1) * sizeof(commands));
-        commands[*size] = NULL;
-    
+   }
     return (commands);
 }

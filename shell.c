@@ -9,6 +9,7 @@ int main()
   int size = 0, status;
   pid_t pid;
   char **commands = NULL;
+  struct stat Stat;
 
   promptMessage();
   while ((characters = getline(&buffer, &bufsize, stdin)) != EOF)
@@ -25,7 +26,10 @@ int main()
     }
     if (pid == 0)
     {
-      execve(commands[0], commands, NULL);
+      if (stat(commands[0], &Stat) == 0)
+        execve(commands[0], commands, NULL);
+      else
+        write(1, "Err\n", 3);
     }
     else
     {
@@ -35,15 +39,13 @@ int main()
       commands = NULL;
       promptMessage();
     }
-
-    /*Pruebita
+  }
+  /*Pruebita
     for (i = 0; i < size; i++)
     {
-      printf("[%p]: %s\n", commands[i], commands[i]);
-    }
+      printf("%s\n", commands[i]);
+    }*/
 
-*/
-  }
   if (characters == -1)
     return (EXIT_FAILURE);
   /*Free sections*/
