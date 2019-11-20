@@ -9,7 +9,6 @@ int main()
   int size = 0, status;
   pid_t pid;
   char **commands = NULL;
-  struct stat Stat;
 
   promptMessage();
   while ((characters = getline(&buffer, &bufsize, stdin)) != EOF)
@@ -17,6 +16,13 @@ int main()
     /*parseString(buffer)*/
     commands = array_to_strok(buffer, commands, &size);
 
+    /*Break the molde*/
+    if (!strncmp(buffer, "exit", 4))
+    {
+      free(commands);
+      commands = NULL;
+      break;
+    }
     /*Hora de forjar la maza*/
     pid = fork();
     if (pid == -1)
@@ -26,10 +32,7 @@ int main()
     }
     if (pid == 0)
     {
-      if (stat(commands[0], &Stat) == 0)
-        execve(commands[0], commands, NULL);
-      else
-        write(1, "Err\n", 3);
+      execve(commands[0], commands, NULL);
     }
     else
     {
@@ -39,6 +42,7 @@ int main()
       commands = NULL;
       promptMessage();
     }
+    
   }
   /*Pruebita
     for (i = 0; i < size; i++)
@@ -46,9 +50,9 @@ int main()
       printf("%s\n", commands[i]);
     }*/
 
+  free(buffer);
   if (characters == -1)
     return (EXIT_FAILURE);
   /*Free sections*/
-  free(buffer);
   return (EXIT_SUCCESS);
 }

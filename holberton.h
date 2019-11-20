@@ -3,7 +3,7 @@
 
 /* MACROS SETSIS */
 
-#define PROMPT "$ "
+#define PROMPT "$EquipoBuenaOndaDinamita "
 
 /* Library */
 
