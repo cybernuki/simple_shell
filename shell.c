@@ -2,8 +2,10 @@
 /**
  * gcc -Wall -Werror -pedantic *.c -o shell && ./shell
  */
-int main()
+int main(int ac, char **av, char **env)
 {
+  (void)ac;
+  (void)av;
   char *buffer = NULL;
   size_t bufsize, characters;
   int size = 0, status;
@@ -22,6 +24,14 @@ int main()
       free(commands);
       commands = NULL;
       break;
+    }
+    else if (!strncmp(buffer, "env", 3))
+    {
+      free(commands);
+      commands = NULL;
+      printEnv(env);
+      promptMessage();
+      continue;
     }
     /*Hora de forjar la maza*/
     pid = fork();

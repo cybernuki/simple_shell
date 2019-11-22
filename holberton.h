@@ -25,5 +25,6 @@ void exec_ve(char *argv[]);
 char **array_to_strok(char *str, char **commands, int *size);
 void promptMessage();
 char *_strncpy(char *dest, char *src, int n);
+void printEnv(char *env[]);
 
 #endif
