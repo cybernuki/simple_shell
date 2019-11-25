@@ -60,6 +60,7 @@ int main(int ac, char **av, char **env)
         else
           printf("ERROR\n");
       }
+      printEnv(env);
     }
     else
     {
