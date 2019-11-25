@@ -149,9 +149,9 @@ char *test_env(const char *command)
 {
   char *path, *dir, *copy;
   unsigned int dir_len, cmd_len;
-  path = _getenv("PATH");
   struct stat buff;
 
+  path = _getenv("PATH");
   dir = strtok(path, ":");
   while (dir != NULL)
   {

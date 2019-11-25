@@ -4,19 +4,20 @@
  */
 int main(int ac, char **av, char **env)
 {
-  (void)ac;
-  (void)av;
-  char *buffer = NULL;
-  size_t bufsize, characters;
+  char *buffer;
+  size_t bufsize;
   int size = 0, status;
   pid_t pid;
   struct stat Stat;
   char *all_dir, **commands = NULL;
 
+  (void)ac;
+  (void)av;
+  buffer = NULL;
   if (isatty(STDIN_FILENO))
     promptMessage();
 
-  while ((characters = getline(&buffer, &bufsize, stdin)) != EOF)
+  while ((getline(&buffer, &bufsize, stdin)) != EOF)
   {
     /*parseString(buffer)*/
     commands = array_to_strok(buffer, commands, &size);
@@ -78,8 +79,6 @@ int main(int ac, char **av, char **env)
     }*/
 
   free(buffer);
-  if (characters == -1)
-    return (EXIT_FAILURE);
   /*Free sections*/
   return (EXIT_SUCCESS);
 }
