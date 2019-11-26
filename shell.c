@@ -2,51 +2,55 @@
 /**
  * gcc -Wall -Werror -pedantic *.c -o shell && ./shell
  */
+
+void exitHandler(int sig)
+{
+  (void)sig;
+  write(STDOUT_FILENO, "\n$ ", 3);
+}
 int main(int ac, char **av, char **env)
 {
   char *buffer;
   size_t bufsize;
-  int size = 0, status;
+  ssize_t getlineCha;
+  int size, status;
   pid_t pid;
   struct stat Stat;
   char *all_dir, **commands = NULL;
 
   (void)ac;
   (void)av;
-  buffer = NULL;
+  buffer = NULL, bufsize = 0, size = 0;
   if (isatty(STDIN_FILENO))
-    promptMessage();
+    write(STDIN_FILENO, "$ ", 2);
 
-  while ((getline(&buffer, &bufsize, stdin)) != EOF)
+  /* CTRL -C */
+  signal(SIGINT, exitHandler);
+  while ((getlineCha = getline(&buffer, &bufsize, stdin)))
   {
+    /* check eof */
+    if (getlineCha == EOF)
+      _EOF(buffer);
+
     /*parseString(buffer)*/
     commands = array_to_strok(buffer, commands, &size);
 
-    /*Break the molde*/
-    if (!strncmp(buffer, EXIT_COMMAND, 4))
-    {
-      free(commands);
-      commands = NULL;
-      break;
-    }
-    else if (!strncmp(buffer, ENV_COMMAND, 3))
-    {
-      free(commands);
-      commands = NULL;
-      printEnv(env);
-      promptMessage();
-      continue;
-    }
     /*Hora de forjar la maza*/
     pid = fork();
     if (pid == -1)
-    {
-      perror("Error");
-      exit(1); /*Cambiado return(1);*/
-    }
+      fork_fail();
     if (pid == 0)
     {
-      if (stat(commands[0], &Stat) == 0)
+      if (commands == NULL)
+        commandNull(buffer);
+    /*Break the molde*/
+      else if (_strcmp("exit", commands[0]))
+          _exit_end(buffer, commands);
+      else if (_strcmp("env", commands[0]))
+          _print_env(buffer, commands, env);
+      /*if (_strcmp(commands[0], EXIT_COMMAND))
+        _exit_end(buffer, commands);*/      
+      else if (stat(commands[0], &Stat) == 0)
         execve(commands[0], commands, env);
       else
       {
@@ -59,25 +63,29 @@ int main(int ac, char **av, char **env)
           free(all_dir);          
         }
         else
+        {
           printf("ERROR\n");
+        }
       }
     }
     else
     {
+      
       wait(&status);
+      if (commands == NULL)
+        free_commands_buff(buffer, commands);
+      else if (_strcmp("exit", commands[0]))
+        _exit_end(buffer, commands);
       /*free commands to re use without memory leaks*/
       free(commands);
       commands = NULL;
       promptMessage();
     }
+    bufsize = 0; buffer = NULL;
   }
-  /*Pruebita
-    for (i = 0; i < size; i++)
-    {
-      printf("%s\n", commands[i]);
-    }*/
-
   free(buffer);
   /*Free sections*/
+  if (getlineCha == -1)
+    return (EXIT_FAILURE);
   return (EXIT_SUCCESS);
 }
