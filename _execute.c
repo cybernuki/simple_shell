@@ -14,8 +14,10 @@ void _execute(char **buff)
     {
         cmd = token(*buff, cmd, &size);
         if (execve(*buff, cmd, NULL) == -1)
+        {
             perror("./shell");
-
+            exit(127);
+        }
     }
     else
     {
