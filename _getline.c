@@ -7,10 +7,5 @@ ssize_t _getline(char **buf)
 
     result = getline(buf, &var,stdin);
 
-    if (_strcmp(*buf , EXIT_CMD) == 0)
-    {
-        free(buf);
-        exit(EXIT_SUCCESS);
-    } result = -1;
     return (result);
 }
