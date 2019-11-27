@@ -8,8 +8,8 @@ void _execute(char **buff)
 
     pid = fork();
 
-    if (pid == -1)
-        _fork_fail(buff);
+    if (pid < 0)
+        perror("Fail"), exit(0);
     if (pid == 0)
     {
         cmd = token(*buff, cmd, &size);

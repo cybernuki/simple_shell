@@ -15,7 +15,7 @@ char **token(char *str, char **commands, int *size)
    {
         (*size) += 1;
         token = strtok(NULL, " \n");
-        commands = (char **)realloc(commands, (*size + 1) * sizeof(commands));
+        commands = (char **)_realloc(commands, (*size) * sizeof(commands),(*size + 1) * sizeof(commands));
         commands[*size] = token;
  
    }
