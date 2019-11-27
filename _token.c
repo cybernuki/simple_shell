@@ -1,8 +1,6 @@
 #include "holberton.h"
-/**
- *
- */
-char **array_to_strok(char *str, char **commands, int *size)
+
+char **token(char *str, char **commands, int *size)
 {
     char *token;
 
@@ -21,5 +19,6 @@ char **array_to_strok(char *str, char **commands, int *size)
         commands[*size] = token;
  
    }
+   
     return (commands);
 }
