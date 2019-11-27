@@ -2,10 +2,10 @@
 
 void _noItte(char *av)
 {
-    (void)av;
-    char *buff;
 
-    buff = NULL;
+    char *buff = NULL;
+
+    (void)av;
     _getline(&buff);
     _execute(&buff);
 }
