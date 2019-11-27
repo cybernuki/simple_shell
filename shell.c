@@ -64,7 +64,7 @@ int main(int ac, char **av, char **env)
         }
         else
         {
-          printf("ERROR\n");
+          perror("ERROR\n");
         }
       }
     }

@@ -20,7 +20,8 @@ void printEnv(char *env[])
 
   while (env[i])
   {
-    printf("%s\n", env[i]);
+    write(1, env[i], _strlen(env[i]));
+    write(1, "\n", 1);
     i++;
   }
 }
