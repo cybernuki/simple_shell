@@ -19,9 +19,9 @@ gcc -Wall -Werror -pedantic *.c -o shell && ./shell
 ```
 
 ## Usage 🔩
-
+_ Non-interactive mode_
 ```bash
-$ ls
+$ 
 ```
 
 ## Contributing  👍
