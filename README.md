@@ -23,6 +23,21 @@ _Non-interactive mode_
 ```bash
 $ gcc -Wall -Werror -Wextra -pedantic *.c -o ./hsh
 $ echo "/bin/ls" | ./hsh
+
+AUTHORS     _getline.c      hsh                 noInteractive.c  _token.c
+errors.c    _getPath.c      interactive.c       README.md
+_execute.c  helper_funcs.c  main.c              _realloc.c
+gcc.sh      holberton.h     man_1_simple_shell  searchDir.c
+```
+_interactive mode_
+```bash
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o ./hsh
+$ ls
+
+AUTHORS     _getline.c      hsh                 noInteractive.c  _token.c
+errors.c    _getPath.c      interactive.c       README.md
+_execute.c  helper_funcs.c  main.c              _realloc.c
+gcc.sh      holberton.h     man_1_simple_shell  searchDir.c
 ```
 
 ## Contributing  👍
