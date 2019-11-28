@@ -21,6 +21,9 @@ void _itte(char **env)
             free(buff);
             continue;
         }
-        _execute(&buff, env);
+        if (_strcmp(buff, "env") == 0)
+            printEnv(env);  
+        else
+            _execute(&buff, env);
     }
 }

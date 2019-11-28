@@ -8,7 +8,6 @@ void _execute(char **buff, char **env)
     struct stat Stat;
 
     pid = fork();
-
     if (pid < 0)
         perror("Fail"), exit(0);
     if (pid == 0)
@@ -27,7 +26,8 @@ void _execute(char **buff, char **env)
     else
     {
         wait(NULL);
-        free(cmd);
+        if (cmd)
+          free(cmd);
         free(*buff);
         cmd = NULL;
     }
