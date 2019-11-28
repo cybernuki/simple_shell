@@ -22,6 +22,7 @@ gcc -Wall -Werror -pedantic *.c -o shell && ./shell
 _Non-interactive mode_
 ```bash
 $ gcc -Wall -Werror -Wextra -pedantic *.c -o ./hsh
+$ echo "/bin/ls" | ./hsh
 ```
 
 ## Contributing  👍
