@@ -21,7 +21,7 @@ gcc -Wall -Werror -pedantic *.c -o shell && ./shell
 ## Usage 🔩
 _Non-interactive mode_
 ```bash
-$ 
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o ./hsh
 ```
 
 ## Contributing  👍
