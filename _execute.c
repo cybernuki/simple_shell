@@ -1,10 +1,11 @@
 #include "holberton.h"
 
-void _execute(char **buff)
+void _execute(char **buff, char **env)
 {
     pid_t pid;
     char **cmd = NULL;
     int size = 0;
+    struct stat Stat;
 
     pid = fork();
 
@@ -13,10 +14,14 @@ void _execute(char **buff)
     if (pid == 0)
     {
         cmd = token(*buff, cmd, &size);
-        if (execve(*buff, cmd, NULL) == -1)
+        if (stat(cmd[0], &Stat) == 0)
         {
-            perror("./shell");
-            exit(127);
+            if (execve(cmd[0], cmd, env) == -1)
+              perror("./shell");
+        }
+        else
+        {
+            searchDir(cmd, env);
         }
     }
     else

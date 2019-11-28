@@ -19,51 +19,34 @@ void printEnv(char *env[])
 /**
  * 
  */
-char *_getenv(const char *name)
+char *_getpath(char **env)
 {
-  extern char **environ;
-  char *environ_value, *nameCopy;
-  unsigned int i, length;
+  char *result = NULL;
+    int i = 0;
 
-  length = _strlen_const(name);
-  nameCopy = malloc((sizeof(char) * length) + 1);
-
-  i = 0;
-  while (name[i])
-  {
-    nameCopy[i] = name[i];
-    ++i;
-  }
-  nameCopy[i] = '\0';
-
-  i = 0;
-  environ_value = strtok(environ[i], "=");
-  while (environ[i])
-  {
-    if (_strcmp(environ_value, nameCopy))
-    {
-      environ_value = strtok(NULL, "\n");
-      free(nameCopy);
-      return (environ_value);
-    }
-    ++i;
-    environ_value = strtok(environ[i], "=");
-  }
-
-  free(nameCopy);
-  return (NULL);
+   result = strtok(env[i], "=");
+   while (result && _strcmp(result, "PATH") != 0 && env[i])
+   {
+       i++;
+        result = strtok(env[i], "=");
+   }
+   if(_strcmp(result, "PATH") == 0)
+   {
+       result = strtok(NULL, "=");
+   }
+  return (result);
 }
 
 /*
  *
  */
-char *test_env(const char *command)
+char *test_env(const char *command, char **env)
 {
   char *path, *dir, *copy;
   unsigned int dir_len, cmd_len;
   struct stat buff;
 
-  path = _getenv("PATH");
+  path = _getpath(env);
   dir = strtok(path, ":");
   while (dir != NULL)
   {

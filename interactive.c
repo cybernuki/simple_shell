@@ -1,6 +1,6 @@
 #include "holberton.h"
 
-void _itte(void)
+void _itte(char **env)
 {
     char *buff = NULL;
     ssize_t result = 0;
@@ -21,6 +21,6 @@ void _itte(void)
             free(buff);
             continue;
         }
-        _execute(&buff);
+        _execute(&buff, env);
     }
 }
