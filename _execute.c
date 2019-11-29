@@ -12,7 +12,9 @@ void _execute(char **buff, char **env)
         perror("Fail"), exit(0);
     if (pid == 0)
     {
-        cmd = token(*buff, cmd, &size);
+	    cmd = token(*buff, cmd, &size);
+	if (!cmd)
+		exit(0);
         if (stat(cmd[0], &Stat) == 0)
         {
             if (execve(cmd[0], cmd, env) == -1)
@@ -26,9 +28,10 @@ void _execute(char **buff, char **env)
     else
     {
         wait(NULL);
-        if (cmd)
-          free(cmd);
+	if (cmd)
+		free(cmd);
         free(*buff);
         cmd = NULL;
+
     }
 }

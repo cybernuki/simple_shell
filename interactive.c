@@ -22,7 +22,7 @@ void _itte(char **env)
             continue;
         }
         if (_strcmp(buff, "env") == 0)
-            printEnv(env);  
+		printEnv(env);
         else
             _execute(&buff, env);
     }

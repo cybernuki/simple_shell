@@ -7,13 +7,18 @@ char **token(char *str, char **commands, int *size)
 	*size = 0;
 
 	token = strtok(str, " \n");
-
-	if (!token)
-		return (NULL);
+	commands[*size] = token;
 	commands = malloc(sizeof(commands));
 	if (!commands)
 		return (NULL);
-	commands[*size] = token;
+
+	if (!token)
+		return (NULL);
+
+	commands = malloc(sizeof(commands));
+	if (!commands)
+		return (NULL);
+
 
 	while (token)
 	{
