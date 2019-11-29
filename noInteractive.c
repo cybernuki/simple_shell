@@ -2,10 +2,12 @@
 
 void _noItte(char *av, char **env)
 {
-
     char *buff = NULL;
 
     (void)av;
-    _getline(&buff);
-    _execute(&buff, env);
+    while (_getline(&buff) != -1)
+    {
+	    _execute(&buff, env);
+    }
+    free(buff);
 }
