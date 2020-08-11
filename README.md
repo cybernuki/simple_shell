@@ -1,58 +1,51 @@
-![](https://www.holbertonschool.com/holberton-logo.png)
+# Simple Shell
 
-# Simple Shell 📜
+### *hsh* - Holberton SHell, custom shell version created by Holberton students
 
-_This is a project to create a simple shell, by the students of Holberto School._
+#### COMPILATION
 
-## Environment 🔥
+If the shell is not compiled then compile it as follows:
 
-_Simple shell was built on Ubuntu LTS 14.04, and compiled with gcc 4.8._
+> gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
-## Installation 📥
+#### SYNOPSIS
 
-Use the git clone [git](https://git-scm.com/docs/git-clone) to install this shell.
+**./hsh**
 
-```bash
-git clone https://github.com/cybernuki/simple_shell.git
-cd simple_shell/
-gcc -Wall -Werror -pedantic *.c -o shell && ./shell
-```
+#### DESCRIPTION
 
-## Usage 🔩
-_Non-interactive mode_
-```bash
-$ gcc -Wall -Werror -Wextra -pedantic *.c -o ./hsh
-$ echo "/bin/ls" | ./hsh
+**Holberton SHell** is a homebrewed **sh**-compatible command language interpreter that executes commands read from the standard input or from a file. Everytime a command is executed in the interactive method described above it will print the shell prompt again after execution is finished. Its use is very similar to the *sh* command line interpreter with the exceptions listed below.
 
-AUTHORS     _getline.c      hsh                 noInteractive.c  _token.c
-errors.c    _getPath.c      interactive.c       README.md
-_execute.c  helper_funcs.c  main.c              _realloc.c
-gcc.sh      holberton.h     man_1_simple_shell  searchDir.c
-```
-_interactive mode_
-```bash
-$ gcc -Wall -Werror -Wextra -pedantic *.c -o ./hsh
-$ ls
+#### OPTIONS
 
-AUTHORS     _getline.c      hsh                 noInteractive.c  _token.c
-errors.c    _getPath.c      interactive.c       README.md
-_execute.c  helper_funcs.c  main.c              _realloc.c
-gcc.sh      holberton.h     man_1_simple_shell  searchDir.c
-```
+This shell does not take any options as of now. However it does handle the CTRL+D and CTRL+C keyboard signals.
 
-## Contributing  👍
+#### ARGUMENTS
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+This shell does not take arguments but if what is desired is to interpret a command in a non interactive fashion then it must be invoked as descibed in the *Invocation* section.
 
-Please make sure to update tests as appropriate.
+#### INVOCATION
 
-## Authors ✒️
+**Interactive Mode -** To call the shell in its interactive mode it must be called as follows:
 
-_creators of the simple-shell project_
+> ./hsh
 
-* **Jhonatan Arenas** - *Initial Work and Developer* - - *Twitter*-[@ookanuki](https://twitter.com/ookanuki) -*github*- [cybernuki](https://github.com/cybernuki) - *Linkedin* - [Jhonatan Arenas](https://www.linkedin.com/in/jhonatan-arenas-24473718b/)
-* **Juan Felipe Cubillos Prado** - *Initial Work and Develeper* - -*Twitter*- [@FeliPrado2](https://twitter.com/FeliPrado2) - *github* - [@FeliPrado31](https://github.com/FeliPrado31)- *Linkedin* - [Juan Felipe Cubillos Prado](https://www.linkedin.com/in/juan-felipe-cubillos-prado-312870180/)
+After this invocation the prompt will be printed and the user will be able to enter command line arguments.
 
-## License ©️
+**Non-Interactive Mode -** To call the shell in its non-interactive mode you first call the command and then pipe it to the shell as follows:
 
-[MIT](https://choosealicense.com/licenses/mit/)
+> [Command] [Command Options] [Arguments] ... | ./hsh
+
+After this invocation the shell will exit and return to the terminal that called it.
+
+#### BUILT-INS
+
+The shell has a few built-in functions. These are: **exit, env** and **cd.**
+
+#### BUGS
+
+The shell does not handle the following special characters _", ', `, \, *, &, #, $$, ||._
+
+#### AUTHOR
+
+Juan Buitrago (_@juanfe9118_) and Arturo Victoria (_@arvicrin_)
